@@ -16,13 +16,11 @@ spring:
               basedOnPreviousValue: false
 
       # Настройки маршрутов
-      server:
-        webflux:
-          routes:
-            - id: main_service_route
-              uri: lb://main-service
-              predicates:
-                - Path=/** # перенаправляем все запросы на main-service
+      routes:
+        - id: main_service_route
+          uri: lb://main-service
+          predicates:
+            - Path=/** # перенаправляем все запросы на main-service
 
 
 management:
