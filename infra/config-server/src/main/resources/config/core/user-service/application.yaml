@@ -6,10 +6,10 @@ spring:
         jdbc.time_zone: UTC
         format_sql: true
     show-sql: true
-  database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   sql.init.mode: always
   datasource:
-    url: jdbc:postgresql://localhost:5432/statsdb
+    url: jdbc:postgresql://localhost:5432/userdb
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
@@ -21,3 +21,9 @@ logging:
       transaction: INFO
       transaction.interceptor: TRACE
       orm.jpa.JpaTransactionManager: DEBUG
+
+stats:
+  service:
+    name: "user-service"
+    id: "stats-server"
+  date_time.format: "yyyy-MM-dd HH:mm:ss"
