@@ -19,6 +19,11 @@ spring:
       server:
         webflux:
           routes:
+            - id: user_service_route
+              uri: lb://user-service
+              predicates:
+                - Path=/admin/users/** # перенаправляем запросы на /admin/users/** на user-service
+
             - id: event_service_route
               uri: lb://event-service
               predicates:
