@@ -1,0 +1,88 @@
+package ru.practicum.controller.event;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import ru.practicum.annotation.LogAllMethods;
+import ru.practicum.dto.event.*;
+import ru.practicum.service.event.EventService;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/users/{userId}/events")
+@Slf4j
+@RequiredArgsConstructor
+@Validated
+@LogAllMethods
+public class PrivateEventController {
+    private final EventService eventService;
+    private static final String USER_ID_VALIDATION_MESSAGE = "userId должен быть больше 0";
+    private static final String EVENT_ID_VALIDATION_MESSAGE = "eventId должен быть больше 0";
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<EventShortDto> findUserEvents(
+            @PathVariable
+            @Positive(message = USER_ID_VALIDATION_MESSAGE)
+            Long userId,
+
+            @Valid
+            @ModelAttribute
+            EventPrivateParam params
+    ) {
+        return eventService.findUserEvents(userId, params);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public EventFullDto createEvent(
+            @PathVariable
+            @Positive(message = USER_ID_VALIDATION_MESSAGE)
+            Long userId,
+
+            @Valid
+            @RequestBody
+            NewEventRequest dto
+    ) {
+        return eventService.createEvent(userId, dto);
+    }
+
+    @GetMapping("/{eventId}")
+    @ResponseStatus(HttpStatus.OK)
+    public EventFullDto findUserEventById(
+            @PathVariable
+            @Positive(message = USER_ID_VALIDATION_MESSAGE)
+            Long userId,
+
+            @PathVariable
+            @Positive(message = EVENT_ID_VALIDATION_MESSAGE)
+            Long eventId
+    ) {
+        return eventService.findUserEventById(eventId, userId);
+    }
+
+    @PatchMapping("/{eventId}")
+    @ResponseStatus(HttpStatus.OK)
+    public EventFullDto updateUserEvent(
+            @PathVariable
+            @Positive(message = USER_ID_VALIDATION_MESSAGE)
+            Long userId,
+
+            @PathVariable
+            @Positive(message = EVENT_ID_VALIDATION_MESSAGE)
+            Long eventId,
+
+            @Valid
+            @RequestBody
+            UpdateEventUserRequest updateRequest
+    ) {
+        UpdateEventUserRequestParam updateEventUserRequestParam =
+                new UpdateEventUserRequestParam(userId, eventId, updateRequest);
+        return eventService.updateUserEvent(updateEventUserRequestParam);
+    }
+}
