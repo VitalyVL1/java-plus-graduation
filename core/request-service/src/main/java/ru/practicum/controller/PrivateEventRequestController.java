@@ -27,6 +27,7 @@ public class PrivateEventRequestController {
 
     private static final String USER_ID_VALIDATION_MESSAGE = "userId должен быть больше 0";
     private static final String EVENT_ID_VALIDATION_MESSAGE = "eventId должен быть больше 0";
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ParticipationRequestDto> findEventRequests(

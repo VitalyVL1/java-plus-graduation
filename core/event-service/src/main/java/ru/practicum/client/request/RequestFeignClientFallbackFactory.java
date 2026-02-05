@@ -26,6 +26,12 @@ public class RequestFeignClientFallbackFactory implements FallbackFactory<Reques
                 fastFallBack(cause);
                 return eventIds.stream().collect(Collectors.toMap(Function.identity(), e -> 0L));
             }
+
+            @Override
+            public Boolean hasConfirmedRequestsForEventAndUser(Long eventId, Long userId) {
+                fastFallBack(cause);
+                return null;
+            }
         };
     }
 }

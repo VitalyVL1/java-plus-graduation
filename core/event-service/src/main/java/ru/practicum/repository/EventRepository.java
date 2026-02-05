@@ -150,7 +150,7 @@ public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPre
             if (onlyAvailable != null && onlyAvailable) {
                 predicate.and(
                         QEvent.event.participantLimit.eq(0)
-                        .or(QEvent.event.participantLimit.gt(QEvent.event.confirmedRequests)));
+                                .or(QEvent.event.participantLimit.gt(QEvent.event.confirmedRequests)));
             }
         }
     }
