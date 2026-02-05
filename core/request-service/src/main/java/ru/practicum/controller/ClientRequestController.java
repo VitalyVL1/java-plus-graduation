@@ -30,7 +30,7 @@ public class ClientRequestController implements RequestClient {
     }
 
     @Override
-    @GetMapping("/{eventId}")
+    @GetMapping("/{eventId}/confirmed")
     public Boolean hasConfirmedRequestsForEventAndUser(
             @PathVariable Long eventId,
             @RequestHeader("X-EWM-USER-ID")

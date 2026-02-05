@@ -43,7 +43,7 @@ public class PublicEventController {
         return eventService.findPublicEventById(id, userId);
     }
 
-    @GetMapping
+    @GetMapping("/recommendations")
     @ResponseStatus(HttpStatus.OK)
     public List<EventShortDto> findUserRecommendations(
             @RequestHeader("X-EWM-USER-ID") Long userId,

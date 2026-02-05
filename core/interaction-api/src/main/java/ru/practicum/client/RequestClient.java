@@ -16,7 +16,7 @@ public interface RequestClient {
     Map<Long, Long> getConfirmedRequestsForEvents(
             @RequestParam List<Long> eventIds);
 
-    @GetMapping("/{eventId}")
+    @GetMapping("/{eventId}/confirmed")
     Boolean hasConfirmedRequestsForEventAndUser(
             @PathVariable Long eventId,
             @RequestHeader("X-EWM-USER-ID") Long userId);
