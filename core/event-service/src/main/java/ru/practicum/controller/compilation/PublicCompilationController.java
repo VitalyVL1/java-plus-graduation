@@ -25,7 +25,7 @@ public class PublicCompilationController {
     public List<CompilationDto> getAllCompilations(@RequestParam(required = false, name = "pinned") Boolean pinned,
                                                    @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
                                                    @RequestParam(defaultValue = "10") @Positive Integer size) {
-       Pageable pageable = new OffsetBasedPageable(from, size);
+        Pageable pageable = new OffsetBasedPageable(from, size);
         return compilationService.findCompilationsByParam(pinned, pageable);
     }
 

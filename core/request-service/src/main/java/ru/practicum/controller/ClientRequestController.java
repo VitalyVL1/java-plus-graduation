@@ -28,4 +28,13 @@ public class ClientRequestController implements RequestClient {
             @RequestParam List<Long> eventIds) {
         return requestService.getConfirmedRequestsForEvents(eventIds);
     }
+
+    @Override
+    @GetMapping("/{eventId}/confirmed")
+    public Boolean hasConfirmedRequestsForEventAndUser(
+            @PathVariable Long eventId,
+            @RequestHeader("X-EWM-USER-ID")
+            Long userId) {
+        return requestService.hasConfirmedRequestsForEventAndUser(eventId, userId);
+    }
 }

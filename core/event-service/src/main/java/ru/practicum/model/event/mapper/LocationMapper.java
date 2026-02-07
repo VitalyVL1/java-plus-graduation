@@ -8,5 +8,6 @@ import ru.practicum.model.event.Location;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface LocationMapper {
     LocationDto toDto(Location location);
+
     Location toEntity(LocationDto locationDto);
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @Slf4j
-public class CommonExceptionHandler extends BaseExceptionHandler{
+public class CommonExceptionHandler extends BaseExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleCommentStateException(final CommentStateException e) {
